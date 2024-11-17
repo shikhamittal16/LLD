@@ -14,6 +14,11 @@ public class Regular implements ParkingSpots {
         this.totalRegularParkingAvail = 0;
     }
 
+    public Regular(Integer totalRegularParkingAvail) {
+        this.totalRegularParkingAvail = totalRegularParkingAvail;
+        this.occupiedRegularParking = 0;
+    }
+
     @Override
     public Integer totalParkingSpots() {
         return totalRegularParkingAvail;

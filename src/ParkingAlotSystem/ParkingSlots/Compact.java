@@ -13,6 +13,11 @@ public class Compact implements ParkingSpots {
         this.occupiedCompactParking = 0;
     }
 
+    public Compact(Integer totalCompactParkingAvail) {
+        this.totalCompactParkingAvail = totalCompactParkingAvail;
+        this.occupiedCompactParking = 0;
+    }
+
     @Override
     public Integer totalParkingSpots() {
         return totalCompactParkingAvail;

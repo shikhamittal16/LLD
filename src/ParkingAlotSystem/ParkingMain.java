@@ -1,9 +1,5 @@
 package ParkingAlotSystem;
-
-import ParkingAlotSystem.ParkingSlots.Compact;
-import ParkingAlotSystem.ParkingSlots.Large;
-import ParkingAlotSystem.ParkingSlots.ParkingSpots;
-import ParkingAlotSystem.ParkingSlots.Regular;
+import ParkingAlotSystem.Payment.BillingModels;
 import ParkingAlotSystem.Payment.Hourly;
 import ParkingAlotSystem.Payment.Monthly;
 import ParkingAlotSystem.Payment.Yearly;
@@ -13,69 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingMain {
-    public static void main(String []arg) throws InterruptedException {
-        ParkingSpots regularParkings = new Regular();  // parking for cars
-        ParkingSpots compactParkings =new Compact(); // parking for bikes
-        ParkingSpots largeParkings = new Large(); // parking for trucks
+    public static void main(String[] args) throws InterruptedException {
+        ParkingLotManager parkingLotManager = new ParkingLotManager();
 
         List<VehicleDetails> registerCarsList = new ArrayList<>();
         List<VehicleDetails> registerBikesList = new ArrayList<>();
         List<VehicleDetails> registerTrucksList = new ArrayList<>();
 
-        Runnable registerCarsTask = () -> {
-            Integer vehicleId = 101;
-            for (int i=0 ; i<10; i++) {
-//              ----------- here i am using builder design pattern -------------
-                VehicleDetails vehicleDetails = new VehicleDetailsBuilder()
-                        .setVehicleId(vehicleId.toString())
-                        .setVehicleType(new Car()).setBillingModel(new Monthly())
-                        .getVehicleDetails();
-                RegisterVehicles registerNewCar = new RegisterVehicles();
-                String status = registerNewCar.registerVehicle(vehicleDetails);
-                if (status.equals("success")) {
-                    registerCarsList.add(vehicleDetails);
-                    vehicleId++;
-                } else {
-                    System.out.println(status);
-                }
-            }
-        };
-        Runnable registerBikesTask = () -> {
-            Integer vehicleId = 201;
-            for (int i=0 ; i<10; i++) {
-//              ----------- here i am using builder design pattern -------------
-                VehicleDetails vehicleDetails = new VehicleDetailsBuilder()
-                        .setVehicleId(vehicleId.toString())
-                        .setVehicleType(new Bike()).setBillingModel(new Hourly())
-                        .getVehicleDetails();
-                RegisterVehicles registerNewBike = new RegisterVehicles();
-                String status = registerNewBike.registerVehicle(vehicleDetails);
-                if (status.equals("success")) {
-                    registerBikesList.add(vehicleDetails);
-                    vehicleId++;
-                } else {
-                    System.out.println(status);
-                }
-            }
-        };
-        Runnable registerTrucksTask = () -> {
-            Integer vehicleId = 301;
-            for (int i=0 ; i<10; i++) {
-//              ----------- here i am using builder design pattern -------------
-                VehicleDetails vehicleDetails = new VehicleDetailsBuilder()
-                        .setVehicleId(vehicleId.toString())
-                        .setVehicleType(new Truck()).setBillingModel(new Yearly())
-                        .getVehicleDetails();
-                RegisterVehicles registerNewTruck = new RegisterVehicles();
-                String status = registerNewTruck.registerVehicle(vehicleDetails);
-                if (status.equals("success")) {
-                    registerTrucksList.add(vehicleDetails);
-                    vehicleId++;
-                }else {
-                    System.out.println(status);
-                }
-            }
-        };
+        Runnable registerCarsTask = createRegisterTask(registerCarsList, new Car(), new Monthly(), parkingLotManager, 101);
+        Runnable registerBikesTask = createRegisterTask(registerBikesList, new Bike(), new Hourly(), parkingLotManager, 201);
+        Runnable registerTrucksTask = createRegisterTask(registerTrucksList, new Truck(), new Yearly(), parkingLotManager, 301);
 
         Thread thread1 = new Thread(registerCarsTask);
         Thread thread2 = new Thread(registerBikesTask);
@@ -89,21 +32,39 @@ public class ParkingMain {
         thread2.join();
         thread3.join();
 
-//      traversing lists
+        printRegisteredVehicles("Registered cars", registerCarsList);
+        printRegisteredVehicles("Registered bikes", registerBikesList);
+        printRegisteredVehicles("Registered trucks", registerTrucksList);
+    }
 
-        System.out.println("Registered cars:");
-        for (VehicleDetails car : registerCarsList) {
-            System.out.println(car);
-        }
+    private static Runnable createRegisterTask(List<VehicleDetails> registerList, VehiclesType vehicleType,
+                                               BillingModels billingModel, ParkingLotManager parkingLotManager,
+                                               int startId) {
+        return () -> {
+            int vehicleId = startId;
+            for (int i = 0; i < 10; i++) {
+                VehicleDetails vehicleDetails = new VehicleDetailsBuilder()
+                        .setVehicleId(String.valueOf(vehicleId))
+                        .setVehicleType(vehicleType)
+                        .setBillingModel(billingModel)
+                        .getVehicleDetails();
+                RegisterVehicles registerNewVehicle = new RegisterVehicles(parkingLotManager);
+                String status = registerNewVehicle.registerVehicle(vehicleDetails);
+                if ("success".equals(status)) {
+                    registerList.add(vehicleDetails);
+                    vehicleId++;
+                } else {
+                    System.out.println(status);
+                }
+            }
+        };
+    }
 
-        System.out.println("Registered bikes:");
-        for (VehicleDetails bike : registerBikesList) {
-            System.out.println(bike);
-        }
-
-        System.out.println("Registered Trucks:");
-        for (VehicleDetails truck : registerTrucksList) {
-            System.out.println(truck);
+    private static void printRegisteredVehicles(String title, List<VehicleDetails> vehicleList) {
+        System.out.println(title + ":");
+        for (VehicleDetails vehicle : vehicleList) {
+            System.out.println(vehicle);
         }
     }
 }
+

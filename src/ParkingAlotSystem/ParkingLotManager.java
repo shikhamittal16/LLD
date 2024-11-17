@@ -11,16 +11,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLotManager {
-    private final Map parkingMap = new HashMap();
+    private final Map<Class<? extends VehiclesType>, ParkingSpots> parkingMap = new HashMap<>();
 
     public ParkingLotManager() {
-        parkingMap.put(Car.class, new Regular());
-        parkingMap.put(Bike.class, new Compact());
-        parkingMap.put(Truck.class, new Large());
+        parkingMap.put(Car.class, new Regular(10));
+        parkingMap.put(Bike.class, new Compact(9));
+        parkingMap.put(Truck.class, new Large(8));
     }
 
-    public String parkVehicle(VehicleDetails vehicleDetails) {
-        ParkingSpots spot = (ParkingSpots) parkingMap.get(vehicleDetails.getVehiclesType().getClass());
+    public synchronized String parkVehicle(VehicleDetails vehicleDetails) {
+        ParkingSpots spot = parkingMap.get(vehicleDetails.getVehiclesType().getClass());
         if (spot != null && spot.isParkingAvailable()) {
             spot.occupySpot();
             return "success";
@@ -28,3 +28,4 @@ public class ParkingLotManager {
         return "Parking full for " + vehicleDetails.getVehiclesType().getClass().getSimpleName();
     }
 }
+

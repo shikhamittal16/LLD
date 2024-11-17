@@ -14,6 +14,11 @@ public class Large implements ParkingSpots {
         this.occupiedLargeParking = 0;
     };
 
+    public Large(Integer totalLargeParkingAvail) {
+        this.totalLargeParkingAvail = totalLargeParkingAvail;
+        this.occupiedLargeParking = 0;
+    }
+
     @Override
     public Integer totalParkingSpots() {
         return totalLargeParkingAvail;

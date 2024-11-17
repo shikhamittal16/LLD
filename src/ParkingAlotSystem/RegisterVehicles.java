@@ -5,8 +5,8 @@ import ParkingAlotSystem.Vehicles.*;
 public class RegisterVehicles {
     private final ParkingLotManager parkingLotManager;
 
-    public RegisterVehicles() {
-        this.parkingLotManager = new ParkingLotManager();
+    public RegisterVehicles(ParkingLotManager parkingLotManager) {
+        this.parkingLotManager = parkingLotManager;
     }
 
     public String registerVehicle(VehicleDetails vehicle) {

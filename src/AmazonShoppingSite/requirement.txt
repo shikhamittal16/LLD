@@ -1,0 +1,11 @@
+Requirements -
+
+1. user should be able to add new products to sell.
+2. user should be able to search for products by their name or category.
+3. user can search and view all the products , but they will have to become a registered member
+to buy a product
+4. user should be able to add/ remove/ modify product items in their shopping cart.
+5. user can check out and buy items in the shopping cart.
+6. users can rate and add a review for a product.
+7. user should get notifications whenever there is a change in the order or shipping status.
+8. user should be able to track their shipment to see the current status of their order

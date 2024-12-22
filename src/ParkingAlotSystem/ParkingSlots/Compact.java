@@ -54,8 +54,4 @@ public class Compact implements ParkingSpots {
             occupiedCompactParking--;
         }
     }
-
-    public void setTotalParkingAvail(Integer count) {
-        this.totalCompactParkingAvail = count;
-    }
 }

@@ -1,0 +1,73 @@
+Functional Requirements -
+
+1. User Management:
+
+   User registration and authentication.
+   User profiles, including KYC verification (e.g., driver's license, identity proof).
+
+2. Car Inventory Management:
+
+   Add, update, or remove cars from the inventory.
+   Track car details such as make, model, year, fuel type, mileage, and condition.
+
+3. Booking System:
+
+   Search for available cars by location, date, and time.
+   Book cars for a specified duration.
+   Cancel bookings and handle refunds.
+
+4. Pricing and Billing:
+
+   Calculate rental charges based on car type, duration, and demand.
+   Apply discounts, coupons, and surcharges.
+   Generate invoices for bookings.
+
+5. Payment System:
+
+   Integrate payment gateways for online transactions.
+   Support multiple payment methods (credit cards, UPI, wallets).
+
+6. Location Services:
+
+   Use GPS to locate cars near the user’s location.
+   Provide directions to car pickup/drop-off points.
+
+7. Notifications:
+
+   Notify users about booking confirmations, cancellations, or delays via email/SMS.
+   Reminder notifications for upcoming bookings.
+
+8. Feedback and Ratings:
+
+   Allow users to rate and review cars and service quality.
+   Provide a mechanism to handle complaints.
+
+9. Admin Panel:
+
+   Manage cars, users, and bookings.
+   View analytics for rentals, revenue, and user activity.
+
+
+Non-Functional Requirements
+
+1. Scalability:
+   The system should handle high traffic during peak hours or promotional events.
+
+2. Performance:
+   Ensure low-latency search and booking operations.
+
+3. Availability:
+   High uptime to ensure continuous booking services.
+
+4. Security:
+   Secure user data and payment information using encryption.
+   Protect against fraud and unauthorized access.
+
+5. Maintainability:
+   Modular design to accommodate new features or updates.
+
+6. Reliability:
+   Ensure consistent booking confirmations and payment processing.
+
+7. Extensibility:
+   Support for future integrations like EV charging stations or third-party services.

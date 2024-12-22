@@ -56,8 +56,4 @@ public class Regular implements ParkingSpots {
             occupiedRegularParking--;
         }
     }
-
-    public void setTotalParkingAvail(Integer count) {
-        this.totalRegularParkingAvail = count;
-    }
 }

@@ -46,7 +46,6 @@ public class ParkingMain {
                 VehicleDetails vehicleDetails = new VehicleDetailsBuilder()
                         .setVehicleId(String.valueOf(vehicleId))
                         .setVehicleType(vehicleType)
-                        .setBillingModel(billingModel)
                         .getVehicleDetails();
                 RegisterVehicles registerNewVehicle = new RegisterVehicles(parkingLotManager);
                 String status = registerNewVehicle.registerVehicle(vehicleDetails);

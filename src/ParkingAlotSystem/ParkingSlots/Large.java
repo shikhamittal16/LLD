@@ -57,9 +57,4 @@ public class Large implements ParkingSpots {
             occupiedLargeParking--;
         }
     }
-
-    public void setTotalParkingAvail(Integer count) {
-        this.totalLargeParkingAvail = count;
-    }
-
 }

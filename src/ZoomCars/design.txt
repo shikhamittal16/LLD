@@ -1,0 +1,122 @@
+class User {
+    String userName;
+    Address address;
+    String password;
+    String mobileNumber;
+    Role role;
+}
+
+enum Role {
+  ADMIN , CUSTOMER , DRIVER
+}
+
+class Admin extends User {
+    addCars();
+    removeCars();
+    updateCarFromInventory();
+}
+
+class Driver extends User {
+   String driverLicense;
+   String identityProof;
+   Car assignedCar;
+   Boolean isVerified;
+   Account accountDetails;
+   List<Booking> oldBookings;
+}
+
+class Address {
+   String streetNo;
+   String streetName;
+   String city;
+   String state;
+   String country;
+}
+
+class Authentication {
+   User user;
+   String token;
+   boolean login(String username, String password);
+   void logout(User user);
+   boolean validateToken(String token);
+}
+
+class Booking {
+    Car carObj;
+    User userDetail;
+    Date pickupTime;
+    Date dropoffTime;
+    Payment paymentObj;
+    BookingStatus bookingStatus;
+    Integer rentalDuration;
+    Feedback feedbackId;
+    String cancelReason;
+    Date cancelledTime;
+}
+
+enum BookingStatus {
+  CONFIRM , CANCEL
+}
+
+class Payment {
+   String transactionID;
+   PaymentStatus paymentStatus;
+   Date paymentDate;
+   Double paymentAmount;
+}
+
+enum PaymentStatus {
+    PAID,
+    UNPAID,
+    PENDING,
+    FAILED,
+    REFUNDED,
+    REFUND_PENDING,
+    CANCELLED,
+    DECLINED
+}
+
+class Car {
+    Double basePrice;
+    String model;
+    FuelType fuelType;
+    String year;
+    String plateNo;
+    CarType carType;
+}
+
+enum CarType {
+   PREMIUM , NORMAL
+}
+
+class Search {
+    List<Car> searchByLocation(String location);
+    List<Car> searchByPickupDateAndTime(Date pickupDate , Date dropOffDate);
+}
+
+class Inventory {
+   List<Car> cars;
+
+   void addCar(Car car);
+   void removeCar(String plateNo);
+   Car getCarDetails(String plateNo);
+   void updateCar(Car car);
+}
+
+interface Notification {
+    void sendNotification(User user, String message);
+}
+
+class MobileNotification implements Notification {
+    void sendNotification(User user, String message);
+}
+
+class EmailNotification implements Notification {
+    void sendNotification(User user, String message);
+}
+
+class Feedback {
+   String feedbackMsg;
+   Date feedbackDate;
+   Integer rating;
+}

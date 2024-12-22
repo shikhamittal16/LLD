@@ -1,0 +1,199 @@
+class Customer {
+ShoppingCart shoppingcart;
+Search searchObj;
+int customerId;
+
+getShoppingCart(customerId);
+addItemToShoppingCart(Item item);
+updateItemFromShoppingCart(Item item);
+removeItemFromShoppingCart(Item item);
+}
+
+class Guest extends Customer {
+Account createNewAccount();
+}
+
+class User Customer {
+Account account;
+}
+
+class Seller extends User {
+addProduct(Product product);
+}
+
+class Buyer extends User {
+Order order;
+void addReview(ProductReview pr);
+OrderStatus placeOrder(ShoppingCart cart);
+}
+
+
+class Account {
+name;
+email;
+phNumber;
+username;
+password;
+List<> shippingAddress;
+AccountStatus accStatus;
+}
+
+class Address {----------}
+
+enum AccountStatus {
+ACTIVE, BLOCKED, INACTIVE;
+}
+
+class ShoppingCart {
+List<Item> items;
+double cartValue;
+
+addItem(item);
+updateItem(item);
+deleteItem(item);
+checkoutItem();
+List<Item> getItem();
+double getCartValue();
+}
+
+
+class Item {
+Product product;
+int quantity;
+}
+
+class Product{
+productId;
+productDescription;
+name;
+ProductCategory productCategory;
+Seller seller;
+double cost;
+List<ProductReview> review;
+}
+
+
+enum ProductCategory {
+ELECTRONICS, FURNITURE, GROCERY, MOBILE;
+}
+
+class ProductReview {
+details;
+Buyee reviewer;
+int rating;
+}
+
+class Search {
+List<product> searchByName(name);
+List<product> searchByCategory(category);
+
+}
+
+class Order {
+int id;
+List<Item> orderItem;
+double ordervalue;
+Buyer buyer;
+Date orderDate;
+NotificationService ns;
+List<OrderLog> orderlog;
+
+placeorder();
+trackOrder();
+addOrderlogs();
+maKEPayment(PaymentType type);
+}
+
+
+enum OrderStatus {
+
+	PACKED, SHIPPED, ENROUTE, OUT_FOR_DELIVERY, DELIVERED, CANCELLED;
+}
+
+public enum PaymentStatus {
+
+	SUCCESS, ERROR, CANCELLED, REFUND_INITIATED, REFUNDED;
+
+}
+
+public enum PaymentType {
+
+	CREDIT_CARD, DEBIT_CARD, NET_BANKING, UPI;
+}
+
+class OrderLog {
+
+	String orderDetail;
+	Date createdDate;
+	OrderStatus status;
+}
+
+class NotificationDomain {
+
+	String notificationID;
+	NotificationType notificationType;
+	User user;
+
+}
+
+
+class NotificationService {
+
+
+
+	public boolean sendNotification(NotificationDomain notificationDomain) {
+
+		Notification notificationObject;
+		MessageAttribute messageAttribute;
+
+		switch(notificationDomain.getNotificationType()) {
+
+
+			case NotificationType.EMAIL:
+				notificationObject = new EmailNotification();
+				messageAttribute = new MessageAttribute("abc@abc.com", notificationDomain.getUser().getAccount().getEmail(),"Order Detail ...");
+				break;
+			case NotificationType.WHATSAPP:
+				notificationObject = new WhatsappNotification();
+				messageAttribute = new MessageAttribute("9888888888", notificationDomain.getUser().getAccount().getPhoneNumber(),"Order Detail ...");
+				break;
+			default:
+				notificationObject = new SMSNotification();
+				messageAttribute = new MessageAttribute("988888888", notificationDomain.getUser().getAccount().getPhoneNumber(),"Order Detail ...");
+				break;
+		}
+
+		return notificationObject.sendNotification(messageAttribute);
+	}
+
+}
+
+class MessageAttributes {
+
+	String to;
+	String from;
+	String message;
+
+}
+
+interface Notification {
+
+	boolean sendNotification(MessageAttribute meesageAttribute);
+
+}
+
+class EmailNotification implements Notification {
+
+	boolean sendNotification(MessageAttribute meesageAttribute);
+}
+
+class WhatsappNotification implements Notification {
+
+	boolean sendNotification(MessageAttribute meesageAttribute);
+}
+
+class SMSNotification implements Notification {
+
+	boolean sendNotification(MessageAttribute meesageAttribute);
+
+}

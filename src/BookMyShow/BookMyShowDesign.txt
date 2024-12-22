@@ -1,0 +1,122 @@
+class BMSService {
+List<CinemaHalls> getMovies(Date date , String city);
+List<CinemaHalls> getCinemaHalls(String city);
+}
+
+
+class CinemaHalls {
+int id;
+String cinemaName;
+Address address;
+List<Audi> audiList;
+
+Map<Date,Movies> getMovies(List<Date> dateList);
+Map<Date,Shows> getShows(List<Date> dateList);
+
+}
+
+class Address {----------------------}
+
+class Audi {
+int id;
+String audiName;
+int totalSeatsl
+List<Show> shows;
+}
+
+class Show{
+int id;
+Movie movie;
+Date startTime;
+Date endTimel
+CinemaHalls cinemaPlayedArl
+List<Seat> seats ; // it is a part of show because seat is dependent on show like how many seats are available for this show etcetc.
+}
+
+class Seat {
+int id;
+SeatType seatType;
+SeatStatus seatStatus;
+double price;
+}
+
+enum SeatType{
+DELUX , VIP, ECONOMY, OTHER
+}
+
+enum SeatStatus {
+BOOKED, AVAILABLE , RESERVED, NOT_AVAILABLE;
+}
+
+class Movie {
+String movieName;
+int id;
+int duration;
+String language;
+Genre genre;
+Date releaseDate;
+Map<String, List<Show>> cityShowPage;
+}
+
+enum Genre {
+SCIENCE, DRAMA, ROMANTIC, FANTASY
+}
+
+-------------- defining actors -----------
+
+
+// base user
+class user {
+int userId;
+Search searchObj;
+}
+
+
+class SystemMember extends user {
+Account account;
+String name;
+String email;
+Address address;
+}
+
+class Member extends SystemMember {
+makeBooking();
+getBooking();
+}
+
+class Admin extends SystemMember {
+addMovie();
+addShow();
+}
+
+class Account{
+String username;
+String password;
+}
+
+class Search {
+searchMovieByName(name);
+searchMovieByGenre(genre);
+searchMovieByLanguage(language);
+searchByDate(date);
+}
+
+
+class Booking {
+String bookingid;
+Date bookingDate;
+Member memberl
+Show show;
+Audi audi;
+BookingStatus bookingStatus;
+double totalAmountl
+List<Seat> seats;
+Payment paymentobj;
+}
+
+class Payment {
+double amount;
+Date payDate;
+int transactionId;
+PaymentStatus status;
+}

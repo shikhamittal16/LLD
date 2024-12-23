@@ -1,6 +1,6 @@
 package ZoomCars.Booking;
 
-import ZoomCars.Booking.Car;
+import ZoomCars.Inventory.Car;
 
 import java.util.ArrayList;
 import java.util.Date;

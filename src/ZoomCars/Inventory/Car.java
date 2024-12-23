@@ -1,4 +1,6 @@
-package ZoomCars.Booking;
+package ZoomCars.Inventory;
+
+import java.util.Date;
 
 public class Car {
     Double basePrice;
@@ -7,4 +9,5 @@ public class Car {
     String year;
     String plateNo;
     CarType carType;
+    Boolean isActive;
 }

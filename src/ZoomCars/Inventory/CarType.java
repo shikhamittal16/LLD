@@ -1,4 +1,4 @@
-package ZoomCars.Booking;
+package ZoomCars.Inventory;
 
 public enum CarType {
     PREMIUM , NORMAL

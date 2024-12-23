@@ -1,7 +1,7 @@
 package ZoomCars.Observable;
 
 
-import ZoomCars.Booking.Car;
+import ZoomCars.Inventory.Car;
 import ZoomCars.Booking.Feedback;
 import ZoomCars.Payments.Payment;
 import ZoomCars.Users.User;

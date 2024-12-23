@@ -1,6 +1,6 @@
 package ZoomCars.Users;
 
-import ZoomCars.Booking.Car;
+import ZoomCars.Inventory.Car;
 import ZoomCars.Observable.Booking;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package ATM;
 
 public interface SubStates {
-    void withdrawMoney();
-    void depositMoney();
-    void transferMoney();
-    void balanceEnquiry();
+    Boolean withdrawMoney(double price , Account accountDetails);
+    Boolean depositMoney(double price , Account accountDetails, String depositMethod);
+    Boolean transferMoney(double price , Account transferFrom , Account transferTo);
+    void balanceEnquiry(Account accountDetails);
 }

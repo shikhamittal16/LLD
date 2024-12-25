@@ -1,0 +1,179 @@
+class ATM {
+  State currentState ;
+
+    void setState(State state) {
+       this.currentState = state;
+    }
+
+    void insertCard() {
+       currentState.insertCard();
+    }
+    void chooseOptions() {
+      currentState.chooseOptions();
+    }
+    void exit() {
+      currentState.exit();
+    }
+}
+
+interface State {
+  void insertCard();
+  void readCard();
+  void chooseOptions();
+  void exit();
+}
+
+interface SubStates {
+  void withdrawMoney();
+  void depositMoney();
+  void transferMoney();
+  void balanceEnquiry();
+}
+
+class IdealState implements States{
+
+   void insertCard() {
+       System.out.println("** Press 1 to insert a card **");
+   }
+
+   void readCard() {
+     // operation not allowed here
+   }
+   void chooseOptions() {
+     // operation not allowed here
+   }
+    void exit() {
+     // operation not allowed here
+    }
+}
+
+class CardReader implements State {
+
+  void insertCard() {
+      // operation not allowed here
+  }
+  void readCard() {
+       // reading card details
+  }
+  void chooseOptions() {
+    // operation not allowed here
+  }
+   void exit() {
+    // exit
+   }
+}
+
+class TransactionOptions implements State {
+
+    void insertCard() {
+        // operation not allowed here
+    }
+
+     void readCard() {
+         // operation not allowed here
+     }
+
+    void chooseOptions() {
+      System.out.println("press 1 to withdrawMoney");
+      System.out.println("press 2 to depositMoney");
+      System.out.println("press 3 to transferMoney");
+      System.out.println("press 4 to balanceEnquiry");
+
+      switch(input) {
+         case 1 :
+             Transaction.withdrawMoney(price , account);
+         case 2 :
+             System.out.println("press 1 to deposit via cash ");
+             System.out.println("press 2 to deposit via check ");
+
+              switch(input) {
+                      case 1 :
+                         Transaction.depositMoney(price , account, "cash");
+                      case 2 :
+                          Transaction.depositMoney(price , account, "check");
+              }
+         case 3 :
+             System.out.println("press 1 to enter beneficiary mobile no ");
+             System.out.println("press 2 to enter beneficiary account no ");
+
+             switch(input) {
+                case 1 :
+                    BankService.findAccountByMobileNo(phn);
+                case 2 :
+                    BankService.findAccountByAccountNo(phn);
+             }
+
+             if(beneficiaryAccountExist)
+                  Transaction.transferMoney(price , transferFrom , transferTo);
+             else
+                  System.out.println("transaction declined");
+         case 4 :
+             Transaction.balanceEnquiry(price , account);
+         default :
+             // operation not allowed here
+      }
+    }
+     void exit() {
+      // exit
+     }
+}
+
+class TransactionImpl implements SubStates{
+  void withdrawMoney(double price , Account accountDetails) {
+
+  }
+  void depositMoney(double price , Account accountDetails){
+
+  }
+  void transferMoney(double price , Account transferFrom , Account transferTo){
+
+  }
+  void balanceEnquiry(double price , Account accountDetails) {
+
+  }
+}
+
+class BankService {
+   Account findAccountByMobileNo(String mobile) {};
+   Account findAccountByAccountNo(String accountNo) {};
+}
+class ATMCard {
+   String atmCardNo;
+   String expiryDate;
+   BankDetails bankDetails;
+   String crnNumber;
+}
+
+class BankDetails {
+ Account accountDetails;
+ String bankName;
+ String postalCode;
+ User userDetails;
+}
+
+class User {
+ String username;
+ String mobileNo;
+ String aadharNo;
+ String panCardNo;
+}
+
+class Account {
+  String accountNo;
+  String atmCard;
+  String debitCard;
+  AccountType accountType;
+  Double balance;
+  List<Transaction> transactionList;
+}
+
+class Transaction {
+  String transactionDesc;
+  Date transactionDate;
+  Account transactionFrom;
+  Account transactionTo;
+}
+
+enum AccountType {
+  SAVING , CURRENT , FIXED_DEPOSIT , SALARY
+}

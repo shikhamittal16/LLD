@@ -1,0 +1,9 @@
+1. any non member(guest) can search and view question
+2. member should be able to post new question
+3. member should be able to add an answer
+4. member can upvote a question , answer or comment
+5. member can flag a question , answer or comment for serious problem or moderator attention
+6. member will earn badges
+7. member can add comments to any question or answer
+8. member can vote to delete or close any question
+9. moderator can close a question or undelete an already deleted question

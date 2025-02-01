@@ -1,0 +1,45 @@
+class NonMember {
+   Question searchQues();
+}
+
+class Member extends Person {
+   String username;
+   String password;
+   Rating rating;
+   List<Question> ques;
+   List<Badge> badges;
+
+   void addNewQuestion(String ques);
+   void addNewAnswer(String ans , Question ques);
+   void upvoteQuestion(Question ques);
+   void upvoteAnswer(Answer ans);
+   void earnNewBadge(Badge badge);
+}
+
+class Question {
+   int questionId;
+   String quesDescription;
+   List<Answer> answers;
+   Boolean isDeleted;
+   Date createdDate;
+   Boolean upvote;
+}
+
+class Answer {
+     int answerId;
+     String description;
+     Boolean isDeleted;
+     Date createdDate;
+     Boolean upvote;
+}
+
+class Rating {
+  int id;
+  int rating;
+}
+
+class Badge {
+  int id;
+  String badgeDesc;
+  int badgeMark;
+}
